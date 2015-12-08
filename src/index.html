@@ -1,0 +1,27 @@
+<!doctype html>
+<html>
+  <head>
+    <title><%= json.project.title %></title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <%= t.include("partials/_head.html") %>
+  </head>
+  <body>
+
+    <main class="paper-hawk">
+      <div class="canvas-container">
+        <div class="canvas-inner">
+          <canvas class="backdrop" width=600 height=600></canvas>
+          <canvas class="face" width=600 height=600></canvas>
+        </div>
+      </div>
+    </main>
+
+    <script src="app.js" async></script>
+    <% if (json.project.production) { %>
+    <%= !json.project.embedded ? t.include("partials/_foot.html") : "" %>
+    <%= t.include("partials/_workHere.html") %>
+    <% } %>
+  </body>
+</html>
