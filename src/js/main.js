@@ -6,16 +6,16 @@ var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
 
 var Hammer = require("hammerjs");
 
-var face = document.querySelector("canvas.face");
-var faceContext = face.getContext("2d");
+var faceCanvas = document.querySelector("canvas.face");
+var faceContext = faceCanvas.getContext("2d");
 
 var cat = new Image();
 cat.src = "./assets/grump.jpg";
 console.log(cat);
 
 var pos = {
-  x: face.width / 2,
-  y: face.height / 2,
+  x: faceCanvas.width / 2,
+  y: faceCanvas.height / 2,
   dx: 0,
   dy: 0,
   scale: 1,
@@ -24,7 +24,7 @@ var pos = {
   height: 1
 };
 
-var mc = new Hammer(face);
+var mc = new Hammer(faceCanvas);
 //enable all panning, pinch gestures
 mc.get("pan").set({ direction: Hammer.DIRECTION_ALL });
 mc.get('pinch').set({ enable: true });
@@ -49,7 +49,7 @@ mc.on("pinchend", function() {
   pos.pinch = 1;
 });
 
-faceContext.arc(face.width / 2, face.height / 2, face.width / 3, 0, Math.PI * 2);
+faceContext.arc(faceCanvas.width / 2, faceCanvas.height / 2, faceCanvas.width / 3, 0, Math.PI * 2);
 // faceContext.fill();
 faceContext.clip();
 
@@ -59,7 +59,7 @@ var drawFace = function() {
   height = height * pinch * scale;
   x = x + dx - width / 2;
   y = y + dy - height / 2;
-  faceContext.clearRect(0, 0, face.width, face.height);
+  faceContext.clearRect(0, 0, faceCanvas.width, faceCanvas.height);
   faceContext.drawImage(cat, x, y, width, height);
 }
 
@@ -81,11 +81,21 @@ var onZoom = function(e) {
 
 qsa(".zoom").forEach(el => el.addEventListener("click", onZoom));
 
-face.addEventListener("wheel", function(e) {
+faceCanvas.addEventListener("wheel", function(e) {
   if (e.deltaY > 0) {
     pos.scale *= 1.1;
   } else {
     pos.scale *= .9;
   }
   drawFace();
-})
+});
+
+var fileInput = document.querySelector("#upload-image");
+fileInput.addEventListener("change", function(e) {
+  var reader = new FileReader();
+  reader.addEventListener("load", function() {
+    cat.src = reader.result;
+    cat.onload = drawFace;
+  });
+  reader.readAsDataURL(fileInput.files[0]);
+});
