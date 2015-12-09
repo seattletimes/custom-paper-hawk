@@ -2,6 +2,8 @@
 // require("./lib/ads");
 // var track = require("./lib/tracking");
 
+var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
+
 var Hammer = require("hammerjs");
 
 var face = document.querySelector("canvas.face");
@@ -47,6 +49,10 @@ mc.on("pinchend", function() {
   pos.pinch = 1;
 });
 
+faceContext.arc(face.width / 2, face.height / 2, face.width / 3, 0, Math.PI * 2);
+// faceContext.fill();
+faceContext.clip();
+
 var drawFace = function() {
   var {x, dx, y, dy, scale, pinch, width, height} = pos;
   width = width * pinch * scale;
@@ -62,3 +68,15 @@ cat.onload = function() {
   pos.height = cat.height;
   drawFace();
 }
+
+var onZoom = function(e) {
+  var el = e.target;
+  if (el.classList.contains("in")) {
+    pos.scale *= 1.1;
+  } else {
+    pos.scale *= .9;
+  }
+  drawFace();
+}
+
+qsa(".zoom").forEach(el => el.addEventListener("click", onZoom));
