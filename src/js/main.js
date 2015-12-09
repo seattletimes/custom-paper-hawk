@@ -77,6 +77,15 @@ var onZoom = function(e) {
     pos.scale *= .9;
   }
   drawFace();
-}
+};
 
 qsa(".zoom").forEach(el => el.addEventListener("click", onZoom));
+
+face.addEventListener("wheel", function(e) {
+  if (e.deltaY > 0) {
+    pos.scale *= 1.1;
+  } else {
+    pos.scale *= .9;
+  }
+  drawFace();
+})
