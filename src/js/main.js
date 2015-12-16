@@ -14,7 +14,7 @@ Rendering plan for printable paper hawk:
 var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
 var $ = require("./savage");
 var SVGCamera = require("./camera");
-var Hammer = require("hammerjs");
+var Hammer = require("hammerjs/hammer.min");
 var SelfieCamera = require("./selfie");
 
 var svgCam = new SVGCamera(document.querySelector("svg"));
@@ -78,7 +78,7 @@ portrait.onload = function() {
   drawFace();
 }
 
-var onZoom = function(e) {
+var onWheelZoom = function(e) {
   var el = e.target;
   if (el.classList.contains("in")) {
     pos.scale *= 1.1;
@@ -88,11 +88,11 @@ var onZoom = function(e) {
   drawFace();
 };
 
-qsa(".zoom").forEach(el => el.addEventListener("click", onZoom));
+qsa(".zoom").forEach(el => el.addEventListener("click", onWheelZoom));
 
 faceCanvas.addEventListener("wheel", function(e) {
   e.preventDefault();
-  if (e.deltaY > 0) {
+  if (e.deltaY < 0) {
     pos.scale *= 1.1;
   } else {
     pos.scale *= .9;
@@ -110,18 +110,8 @@ fileInput.addEventListener("change", function(e) {
   reader.readAsDataURL(fileInput.files[0]);
 });
 
-var skin = [];
-
-$("svg path, svg rect").each(function(element) {
-  var style = window.getComputedStyle(element);
-  var fill = style.fill.toUpperCase().replace(/ +/g, "");
-  if (fill == "#2E557A" || fill == "RGB(219,184,150)") {
-    skin.push(element);
-  }
-});
-
 var onResize = function() {
-  var faceBounds = document.querySelector("#face").getBoundingClientRect();
+  var faceBounds = document.querySelector("#face .st61").getBoundingClientRect();
   var containerBounds = document.querySelector(".canvas-inner").getBoundingClientRect();
   faceCanvas.style.width = faceBounds.width / containerBounds.width * 100 + "%";
   faceCanvas.style.height = faceBounds.height / containerBounds.height * 100 + "%";
@@ -149,3 +139,13 @@ document.querySelector(".take-selfie").addEventListener("click", function() {
     drawFace();
   })
 });
+
+var onSkinChange = function() {
+  console.log(this);
+  var shade = this.getAttribute("data-shade");
+  $("#face rect, #face path, #face polygon").style({
+    fill: shade
+  });
+};
+
+qsa(".skin-tones .skin").forEach(el => el.addEventListener("click", onSkinChange));

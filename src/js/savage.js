@@ -90,6 +90,17 @@ var mixin = {
 
   on(event, fn) {
     this.addEventListener(event, fn);
+  },
+
+  style(name, value) {
+    var styles = name;
+    if (typeof styles != "object") {
+      styles = {}
+      styles[name] = value;
+    }
+    for (var key in styles) {
+      this.style[key] = styles[key];
+    }
   }
 };
 
