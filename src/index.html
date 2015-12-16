@@ -12,7 +12,7 @@
     <main class="paper-hawk">
       <div class="canvas-container">
         <div class="canvas-inner">
-          <canvas class="backdrop" width=600 height=600></canvas>
+          <%= t.include("assets/PaperDollFace.svg") %>
           <canvas class="face" width=600 height=600></canvas>
         </div>
         <div class="controls">
@@ -22,7 +22,17 @@
       </div>
       <label for="upload-image">Upload image</label>
       <input type="file" id="upload-image"></input>
+      <button class="take-selfie">Selfie</button>
     </main>
+
+    <div class="viewfinder-modal">
+      <a class="close">&times;</a>
+      <div class="viewfinder-inner">
+        <video class="viewfinder"></video>
+        <div class="reticule"></div>
+      </div>
+      <button class="shutter">3... 2... 1...</button>
+    </div>
 
     <script src="app.js" async></script>
     <% if (json.project.production) { %>

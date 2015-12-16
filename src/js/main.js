@@ -2,16 +2,29 @@
 // require("./lib/ads");
 // var track = require("./lib/tracking");
 
-var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
+/*
+Rendering plan for printable paper hawk:
+- get face zone from the SVG, create a clip path for it
+- is it possible to reference a canvas image from SVG?
+- Add the ability to change the face fill to different colors
+- On print, render the SVG to a big canvas and then dump to data URI for downloading?
+- 
+*/
 
+var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
+var $ = require("./savage");
+var SVGCamera = require("./camera");
 var Hammer = require("hammerjs");
+var SelfieCamera = require("./selfie");
+
+var svgCam = new SVGCamera(document.querySelector("svg"));
+var selfie = new SelfieCamera();
 
 var faceCanvas = document.querySelector("canvas.face");
 var faceContext = faceCanvas.getContext("2d");
 
-var cat = new Image();
-cat.src = "./assets/grump.jpg";
-console.log(cat);
+var portrait = new Image();
+portrait.src = "./assets/grump.jpg";
 
 var pos = {
   x: faceCanvas.width / 2,
@@ -49,10 +62,6 @@ mc.on("pinchend", function() {
   pos.pinch = 1;
 });
 
-faceContext.arc(faceCanvas.width / 2, faceCanvas.height / 2, faceCanvas.width / 3, 0, Math.PI * 2);
-// faceContext.fill();
-faceContext.clip();
-
 var drawFace = function() {
   var {x, dx, y, dy, scale, pinch, width, height} = pos;
   width = width * pinch * scale;
@@ -60,12 +69,12 @@ var drawFace = function() {
   x = x + dx - width / 2;
   y = y + dy - height / 2;
   faceContext.clearRect(0, 0, faceCanvas.width, faceCanvas.height);
-  faceContext.drawImage(cat, x, y, width, height);
+  faceContext.drawImage(portrait, x, y, width, height);
 }
 
-cat.onload = function() {
-  pos.width = cat.width;
-  pos.height = cat.height;
+portrait.onload = function() {
+  pos.width = portrait.width;
+  pos.height = portrait.height;
   drawFace();
 }
 
@@ -82,6 +91,7 @@ var onZoom = function(e) {
 qsa(".zoom").forEach(el => el.addEventListener("click", onZoom));
 
 faceCanvas.addEventListener("wheel", function(e) {
+  e.preventDefault();
   if (e.deltaY > 0) {
     pos.scale *= 1.1;
   } else {
@@ -94,8 +104,48 @@ var fileInput = document.querySelector("#upload-image");
 fileInput.addEventListener("change", function(e) {
   var reader = new FileReader();
   reader.addEventListener("load", function() {
-    cat.src = reader.result;
-    cat.onload = drawFace;
+    portrait.src = reader.result;
+    portrait.onload = drawFace;
   });
   reader.readAsDataURL(fileInput.files[0]);
+});
+
+var skin = [];
+
+$("svg path, svg rect").each(function(element) {
+  var style = window.getComputedStyle(element);
+  var fill = style.fill.toUpperCase().replace(/ +/g, "");
+  if (fill == "#2E557A" || fill == "RGB(219,184,150)") {
+    skin.push(element);
+  }
+});
+
+var onResize = function() {
+  var faceBounds = document.querySelector("#face").getBoundingClientRect();
+  var containerBounds = document.querySelector(".canvas-inner").getBoundingClientRect();
+  faceCanvas.style.width = faceBounds.width / containerBounds.width * 100 + "%";
+  faceCanvas.style.height = faceBounds.height / containerBounds.height * 100 + "%";
+  faceCanvas.style.left = (faceBounds.left - containerBounds.left) / containerBounds.width * 100 + "%";
+  faceCanvas.style.top = (faceBounds.top - containerBounds.top) / containerBounds.height * 100 + "%";
+  faceCanvas.width = faceCanvas.offsetWidth;
+  faceCanvas.height = faceCanvas.offsetHeight;
+  faceContext.arc(faceCanvas.width / 2, faceCanvas.height / 2, faceCanvas.width / 2, 0, Math.PI * 2);
+  faceContext.clip();
+  pos.x = faceCanvas.width / 2;
+  pos.y = faceCanvas.height / 2;
+  drawFace();
+};
+
+window.addEventListener("resize", onResize);
+onResize();
+
+document.querySelector(".take-selfie").addEventListener("click", function() {
+  selfie.open(function(image) {
+    portrait = image;
+    pos.width = portrait.width;
+    pos.height = portrait.height;
+    pos.x = 0;
+    pos.y = 0;
+    drawFace();
+  })
 });
