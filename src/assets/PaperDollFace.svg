@@ -58,13 +58,13 @@
 	.st50{clip-path:url(#SVGID_65_);fill:#315679;}
 	.st51{fill:none;stroke:#FFFFFF;stroke-width:2;}
 	.st52{fill:none;stroke:#000000;stroke-dasharray:3,2;}
-	.st53{font-family:'SunST-Medium';}
+	.st53{font-family:"ff-dagny-web-pro", Helvetica Neue, Helvetica, sans-serif;}
 	.st54{font-size:15.0972;}
 	.st55{fill:#926943;}
 	.st56{fill:none;stroke:#6C7E99;stroke-width:2;}
 	.st57{display:none;fill:none;stroke:#B2B3B6;stroke-width:3;}
 	.st58{fill:#77C25E;}
-	.st59{font-family:'SunST-ExtraBold';}
+	.st59{font-family:"ff-meta-serif-web-pro", Georgia, serif}
 	.st60{font-size:24.7044;}
 	.st61{fill:#DBB896;}
 	.st62{enable-background:new    ;}

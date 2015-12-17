@@ -136,6 +136,7 @@ document.querySelector(".take-selfie").addEventListener("click", function() {
     pos.height = portrait.height;
     pos.x = faceCanvas.width / 2;
     pos.y = faceCanvas.width / 2;
+    pos.scale = 1;
     drawFace();
   })
 });
