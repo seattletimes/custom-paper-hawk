@@ -134,18 +134,36 @@ document.querySelector(".take-selfie").addEventListener("click", function() {
     portrait = image;
     pos.width = portrait.width;
     pos.height = portrait.height;
-    pos.x = 0;
-    pos.y = 0;
+    pos.x = faceCanvas.width / 2;
+    pos.y = faceCanvas.width / 2;
     drawFace();
   })
 });
 
-var onSkinChange = function() {
-  console.log(this);
-  var shade = this.getAttribute("data-shade");
+var setShade = function(shade) {
   $("#face rect, #face path, #face polygon").style({
     fill: shade
   });
+}
+
+var onSkinChange = function() {
+  var shade = this.getAttribute("data-shade");
+  setShade(shade);
 };
 
 qsa(".skin-tones .skin").forEach(el => el.addEventListener("click", onSkinChange));
+
+document.querySelector(".skin-tones .dropper").addEventListener("click", function() {
+  var clickImage = function(e) {
+    var bounds = faceCanvas.getBoundingClientRect();
+    var x = e.clientX - bounds.left;
+    var y = e.clientY - bounds.top;
+    var pixels = faceContext.getImageData(x, y, 1, 1);
+    var [r,g,b] = pixels.data;
+    setShade(`rgb(${r}, ${g}, ${b})`);
+    document.body.classList.remove("eyedropper");
+    faceCanvas.removeEventListener("click", clickImage);
+  }
+  document.body.classList.add("eyedropper");
+  faceCanvas.addEventListener("click", clickImage);
+});

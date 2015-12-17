@@ -12,8 +12,9 @@
     <main class="paper-hawk">
       <div class="skin-tones">
         <% ["#F7DECE", "#F3D2A2", "#D5AB88", "#AF7E57", "#7C533E"].forEach(function(shade) { %>
-        <button class="skin" data-shade="<%= shade %>" style="background: <%= shade %>"></button>
+        <button class="skin emoji" data-shade="<%= shade %>" style="background: <%= shade %>"></button>
         <% }) %>
+        <button class="skin dropper"></button>
       </div>
       <div class="canvas-container">
         <div class="canvas-inner">

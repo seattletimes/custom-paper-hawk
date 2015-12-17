@@ -16,6 +16,10 @@
     .display-flex();
   }
 
+  .viewfinder-inner {
+    position: relative;
+  }
+
   video {
     max-width: 100%;
     width: 600px;
@@ -34,5 +38,22 @@
 
   .shutter {
     
+  }
+
+  .reticule {
+    @size: 200px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -webkit-transform: translateX(-50%) translateY(-50%);
+    transform: translateX(-50%) translateY(-50%);
+    width: @size;
+    height: @size;
+    // border-radius: 50%;
+    border: 3px dashed white;
+    color: white;
+    line-height: @size;
+    text-align: center;
+    font-size: @size;
   }
 }
