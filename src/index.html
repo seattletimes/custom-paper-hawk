@@ -5,30 +5,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <%= t.include("partials/_head.html") %>
   </head>
   <body>
+    <script>
+/*immediately jump to HTTPS for GUM*/
+var l = window.location.toString();
+if (!l.match(/localhost/) && !l.match(/https:/i)) {
+  window.location = l.replace("http:", "https:");
+}
+    </script>
 
     <main class="paper-hawk">
-      <div class="skin-tones">
-        <% ["#F7DECE", "#F3D2A2", "#D5AB88", "#AF7E57", "#7C533E"].forEach(function(shade) { %>
-        <button class="skin emoji" data-shade="<%= shade %>" style="background: <%= shade %>"></button>
-        <% }) %>
-        <button class="skin dropper"></button>
-      </div>
       <div class="canvas-container">
         <div class="canvas-inner">
           <%= t.include("assets/PaperDollFace.svg") %>
           <canvas class="face" width=600 height=600></canvas>
         </div>
         <div class="controls">
-          <button class="zoom out">-</button>
-          <button class="zoom in">+</button>
+          <div class="image-manipulation">
+            <a title="Zoom out" class="zoom out button"><i class="fa fa-search-minus"></i></a>
+            <a title="Zoom in" class="zoom in button"><i class="fa fa-search-plus"></i></a>
+            <label title="Upload photo" class="file-upload button" for="upload-image">
+              <i class="fa fa-photo"></i>
+            </label>
+            <input type="file" id="upload-image"></input>
+            <a title="Photo from camera" class="take-selfie button"><i class="fa fa-camera"></i></a>
+          </div>
+          <div class="skin-tones">
+            <% ["#F7DECE", "#F3D2A2", "#D5AB88", "#AF7E57", "#7C533E"].forEach(function(shade) { %>
+            <button class="skin emoji" data-shade="<%= shade %>" style="background: <%= shade %>">
+              <i class="fa fa-user"></i>
+            </button>
+            <% }) %>
+            <button class="skin dropper"><i class="fa fa-eyedropper"></i></button>
+          </div>
         </div>
       </div>
-      <label for="upload-image">Upload image</label>
-      <input type="file" id="upload-image"></input>
-      <button class="take-selfie">Selfie</button>
     </main>
 
     <div class="viewfinder-modal">

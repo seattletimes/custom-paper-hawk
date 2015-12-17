@@ -1,37 +1,3 @@
 @import "seattletimes";
 @import "viewfinder";
-
-.canvas-container {
-  max-width: 100%;
-  // width: 600px;
-  padding: 20px;
-
-  .canvas-inner {
-    position: relative;
-  }
-
-  svg {
-    max-width: 100%;
-  }
-
-  canvas.face {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    cursor: move;
-
-    .eyedropper & {
-      cursor: crosshair;
-    }
-  }
-}
-
-.skin-tones {
-  .skin {
-    width: 40px;
-    height: 40px;
-    border: none;
-  }
-}
+@import "doll";
