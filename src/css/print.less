@@ -2,19 +2,30 @@
   display: none;
 }
 
+.page-break {
+  display: block;
+  height: 0;
+  clear: both;
+  break-before: always;
+  page-break-before: always;
+  position: relative;
+}
+
 @media print {
 
   nav.main-nav,
-  .nav-bottom {
+  .nav-bottom,
+  .ad {
     display: none;
   }
 
-  main.paper-hawk > * {
+  .paper-hawk > * {
     display: none;
   }
 
-  main.paper-hawk {
+  .paper-hawk {
     width: 100%;
+    position: relative;
 
     .print-logo {
       display: block;
@@ -38,12 +49,6 @@
       }
     }
 
-  }
-
-  .page-break {
-    display: block;
-    page-break-before: always;
-    break-before: always;
   }
 
 }

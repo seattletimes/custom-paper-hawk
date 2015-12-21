@@ -21,7 +21,7 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
 
     <%= t.include("partials/_ad.html", { type: "banner" }) %>
 
-    <main class="paper-hawk">
+    <div class="paper-hawk">
       <h1>Build your own Paper Hawk</h1>
 
       <p>
@@ -100,16 +100,23 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
         </div>
       </div>
 
-      <br class="page-break">
-      <img src="./assets/seattletimes.svg" class="print-logo">
-      <h2>Helmet/arms</h2>
+    </div>
+
+    <div class="page-break"></div>
+    
+    <div class="paper-hawk">
+
+      <h2>
+        <img src="./assets/seattletimes.svg" class="print-logo">
+        Helmet/arms
+      </h2>
 
       <div class="canvas-container">
         <div class="canvas-inner">
           <%= t.include("assets/PaperDollHelmet.svg") %>
         </div>
       </div>
-    </main>
+    </div>
 
     <div class="viewfinder-modal">
       <a class="close">&times;</a>
