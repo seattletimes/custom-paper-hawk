@@ -16,22 +16,7 @@ var originalViewbox = document.querySelector("svg").getAttribute("viewBox").spli
 var faceCanvas = document.querySelector("canvas.face");
 var faceContext = faceCanvas.getContext("2d");
 
-var mug = new Image();
-
-//set up the mug for the first time
-var mugCanvas = document.createElement("canvas");
-mugCanvas.width = mugCanvas.height = 400;
-var mugContext = mugCanvas.getContext("2d");
-mugContext.font = "bold 30px sans-serif";
-mugContext.textAlign = "center";
-mugContext.fillText("YOUR", mugCanvas.width / 2, 180);
-mugContext.fillText("FACE", mugCanvas.width / 2, 220);
-mugContext.fillText("HERE", mugCanvas.width / 2, 260);
-try {
-  mug.src = mugCanvas.toDataURL();
-} catch (err) { console.log(err) }
-
-// Rendering for the mug
+// Global position state for the mug
 var pos = {
   x: faceCanvas.width / 2,
   y: faceCanvas.height / 2,
@@ -42,6 +27,22 @@ var pos = {
   width: 1,
   height: 1
 };
+var mug = new Image();
+
+//set up the mug for the first time
+var mugCanvas = document.createElement("canvas");
+mugCanvas.width = mugCanvas.height = 600;
+var mugContext = mugCanvas.getContext("2d");
+mugContext.font = "bold 30px sans-serif";
+mugContext.textAlign = "center";
+var w = mugCanvas.width / 2;
+var h = mugCanvas.height / 2;
+// mugContext.fillRect(0, 0, mugCanvas.width, mugCanvas.height);
+mugContext.fillText("YOUR", w, h - 20);
+mugContext.fillText("FACE", w, h + 20);
+mugContext.fillText("HERE", w, h + 60);
+pos.width = pos.height = mugCanvas.width;
+mug.src = mugCanvas.toDataURL();
 
 var facePath = document.querySelector("#face .front");
 var svgContainer = document.querySelector(".canvas-inner");
@@ -71,8 +72,10 @@ var positionFaceCanvas = function() {
 
   //set the clipping path
   var vScale = 1.5;
+  var x = faceCanvas.width / 2;
+  var y = faceCanvas.height / 2 / vScale * .8;
   faceContext.scale(1, vScale);
-  faceContext.arc(faceCanvas.width / 2, faceCanvas.height / 2.2 / vScale, faceCanvas.width / 1.85, 0, Math.PI * 2);
+  faceContext.arc(x, y, faceCanvas.width / 1.85, 0, Math.PI * 2);
   faceContext.clip();
   faceContext.scale(1, 1 / vScale);
 };
