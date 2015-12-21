@@ -1,6 +1,7 @@
 var ease = p => 0.5 - Math.cos( p * Math.PI ) / 2;
 
 var clone = require("./clone");
+var noop = function() {};
 
 class Camera {
   constructor(element) {
@@ -9,7 +10,7 @@ class Camera {
     this.queue = [];
   }
 
-  pan(to, duration = 1000) {
+  pan(to, duration = 1000, callback = noop, done = noop) {
     if (this.animating) {
       this.queue.push({
         method: "pan",
@@ -44,10 +45,12 @@ class Camera {
       var box = [x + dx * scale, y + dy * scale, width + dw * scale, height + dh * scale];
       box = box.map(Math.round);
       element.setAttribute("viewBox", box.join(" "));
+      callback();
       if (dt < 1) {
         (requestAnimationFrame || setTimeout)(step);
         return;
       }
+      done();
       self.animating = false;
       if (self.queue.length) {
         var instruction = self.queue.shift();
@@ -58,7 +61,7 @@ class Camera {
     step();
   }
 
-  zoomTo(target, padding = 20) {
+  zoomTo(target, padding = 20, duration = 1000, callback, done) {
     if (typeof target == "string") {
       target = document.querySelector(target);
     }
@@ -67,7 +70,7 @@ class Camera {
     bounds.y -= padding;
     bounds.width += padding * 2;
     bounds.height += padding * 2;
-    this.pan(bounds);
+    this.pan(bounds, duration, callback, done);
   }
 }
 

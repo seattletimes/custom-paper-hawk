@@ -17,30 +17,79 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
 }
     </script>
 
+    <%= t.include("partials/_nav.html") %>
+
     <main class="paper-hawk">
+      <h1>Build your own Paper Hawk</h1>
+
+      <p>
+        It's your turn to join the team! Click the button below to begin customizing your own paper hawk, then print it out and assemble your very own Paper Hawk.
+
+      <div class="workflow-controls">
+        <a class="customize mode">Customize your Paper Hawk</a>
+        <a class="print mode">Zoom out and print</a>
+      </div>
+
+      <img src="./assets/seattletimes.svg" class="print-logo">
+      <h2>Face and body</h2>
+
       <div class="canvas-container">
         <div class="canvas-inner">
           <%= t.include("assets/PaperDollFace.svg") %>
           <canvas class="face" width=600 height=600></canvas>
         </div>
         <div class="controls">
+          
           <div class="image-manipulation">
-            <a title="Zoom out" class="zoom out button"><i class="fa fa-search-minus"></i></a>
-            <a title="Zoom in" class="zoom in button"><i class="fa fa-search-plus"></i></a>
+            <a title="Zoom in" class="zoom in button">
+              <i class="fa fa-search-plus"></i>
+              Zoom in
+            </a>
+            <a title="Zoom out" class="zoom out button">
+              <i class="fa fa-search-minus"></i>
+              Zoom out
+            </a>
             <label title="Upload photo" class="file-upload button" for="upload-image">
               <i class="fa fa-photo"></i>
+              Upload photo
             </label>
             <input type="file" id="upload-image"></input>
-            <a title="Photo from camera" class="take-selfie button"><i class="fa fa-camera"></i></a>
+
+            <a title="Photo from camera" class="take-selfie button">
+              <i class="fa fa-camera"></i>
+              Take photo
+            </a>
           </div>
+          
+          <div class="label">Skin tone</div>
           <div class="skin-tones">
             <% ["#F7DECE", "#F3D2A2", "#D5AB88", "#AF7E57", "#7C533E"].forEach(function(shade) { %>
             <button class="skin emoji" data-shade="<%= shade %>" style="background: <%= shade %>">
-              <i class="fa fa-user"></i>
+              <i class="fa fa-paint-brush"></i>
             </button>
             <% }) %>
             <button class="skin dropper"><i class="fa fa-eyedropper"></i></button>
           </div>
+
+          <div class="label">Hair color</div>
+          <div class="hair-tones">
+            <% ["black", "#422014", "#7B382F", "#F5F095", "#FAFFF1"].forEach(function(shade) { %>
+            <button class="hair color" data-shade="<%= shade %>" style="background: <%= shade %>">
+              <i class="fa fa-paint-brush"></i>
+            </button>
+            <% }) %>
+            <button class="hair dropper"><i class="fa fa-eyedropper"></i></button>
+          </div>
+
+        </div>
+      </div>
+
+      <img src="./assets/seattletimes.svg" class="print-logo">
+      <h2>Helmet/arms</h2>
+
+      <div class="canvas-container">
+        <div class="canvas-inner">
+          <%= t.include("assets/PaperDollHelmet.svg") %>
         </div>
       </div>
     </main>
@@ -53,6 +102,8 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
       </div>
       <button class="shutter">3... 2... 1...</button>
     </div>
+
+    <%= t.include("partials/_navBottom.html") %>
 
     <script src="app.js" async></script>
     <% if (json.project.production) { %>

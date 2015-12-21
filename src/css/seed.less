@@ -1,3 +1,34 @@
 @import "seattletimes";
 @import "viewfinder";
 @import "doll";
+@import "print";
+
+main.paper-hawk {
+  max-width: 800px;
+  margin: auto;
+}
+
+.workflow-controls {
+  overflow: hidden;
+
+  .mode {
+    float: left;
+    width: 50%;
+    text-align: center;
+    color: white;
+    background: @df-dark-gray;
+    font-family: @df-sans;
+    padding: 16px 0;
+    border: 2px solid white;
+    cursor: pointer;
+    transition: background .2s linear;
+
+    &.active {
+      background: @df-blue;
+    }
+
+    &:hover {
+      background: darken(@df-blue, 20%);
+    }
+  }
+}

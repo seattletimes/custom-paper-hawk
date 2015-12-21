@@ -9,6 +9,10 @@ var getUserMedia = (function() {
   return gum.bind(navigator);
 })();
 
+if (!getUserMedia) {
+  document.body.classList.add("no-gum");
+}
+
 var modal = document.querySelector(".viewfinder-modal");
 var viewfinder = modal.querySelector(".viewfinder");
 
@@ -32,6 +36,7 @@ WebCam.prototype = {
       viewfinder.play();
     };
     modal.classList.add("show");
+    modal.querySelector(".reticule").innerHTML = "";
     if (!self.stream) {
       getUserMedia({ video: true }, success, err => window.alert(err));
     } else {

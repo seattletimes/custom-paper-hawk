@@ -1,0 +1,48 @@
+.print-logo {
+  display: none;
+}
+
+@media print {
+
+  nav.main-nav,
+  .nav-bottom {
+    display: none;
+  }
+
+  main.paper-hawk > * {
+    display: none;
+  }
+
+  main.paper-hawk {
+    width: 100%;
+
+    .print-logo {
+      display: block;
+      max-width: 20%;
+      max-height: 50px;
+      float: left;
+    }
+
+    h2 {
+      display: block;
+      text-align: right;
+      font-family: @df-sans;
+    }
+
+    .canvas-container {
+      width: 100%;
+      display: block;
+
+      .controls {
+        display: none;
+      }
+    }
+
+  }
+
+  .page-break {
+    display: block;
+    page-break-before: always;
+  }
+
+}

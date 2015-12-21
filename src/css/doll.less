@@ -26,7 +26,7 @@
     width: 100%;
     height: 100%;
     cursor: move;
-    outline: 1px solid yellow;
+    // outline: 1px solid yellow;
 
     .eyedropper & {
       cursor: crosshair;
@@ -35,31 +35,65 @@
 }
 
 .controls {
+  font-family: @df-sans;
   position: absolute;
   bottom: 0;
   width: 100%;
   background: rgba(255, 255, 255, .8);
+  transition: opacity .2s linear;
+  box-shadow: 0 -8px 16px rgba(0, 0, 0, .2);
 
-  .skin-tones {
-    .skin {
-      width: 40px;
-      height: 40px;
+  .printing & {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .label {
+    font-size: 13px;
+    // font-weight: bold;
+    text-align: center;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .skin-tones, .hair-tones {
+    .display-flex();
+    .skin, .hair {
+      .flex(1);
+      height: 30px;
       border: none;
       cursor: pointer;
+      font-size: 20px;
+      color: rgba(128, 128, 128, .5);
+      text-shadow: 0 0 black;
     }
   }
 
+  .image-manipulation {
+    text-align: center;
+    padding: 8px 0;
+  }
+
   .button {
-    border: 1px solid black;
+    border: 1px solid @df-middle-gray;
+    border-radius: 4px;
     background: white;
-    padding: 4px;
+    padding: 4px 16px;
     cursor: pointer;
     display: inline-block;
     line-height: 1;
-    font-size: 20px;
+    font-size: 12px;
     font-family: @df-sans;
     text-align: center;
     color: black;
+    text-transform: uppercase;
+    transition: background .2s linear;
+
+    i.fa {
+      display: block;
+      font-size: 16px;
+      padding-bottom: 8px;
+    }
 
     &:hover {
       background: @df-light-gray;
@@ -68,4 +102,8 @@
 
   input[type=file] { display: none; }
 
+}
+
+.no-gum {
+  .take-selfie.button { display: none }
 }
