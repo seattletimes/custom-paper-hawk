@@ -23,6 +23,12 @@ main.paper-hawk {
     cursor: pointer;
     transition: background .2s linear;
 
+    @media @mobile {
+      display: block;
+      float: none;
+      width: 100%;
+    }
+
     &.active {
       background: @df-blue;
     }
