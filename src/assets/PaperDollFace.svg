@@ -68,7 +68,7 @@
 	.st60{font-size:24.7044;}
 	.st61{fill:#DBB896;}
 	.st62{enable-background:new;}
-	.st63{font-family:'Impact';}
+	.st63{font-family:'Impact', "ff-dagny-web-pro", Helvetica Neue, Helvetica, sans-serif;}
 	.st64{font-size:51.6434;}
 	.st65{fill:none;stroke:#B2B3B6;stroke-width:3;}
 </style>
