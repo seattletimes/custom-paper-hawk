@@ -17,7 +17,19 @@ var faceCanvas = document.querySelector("canvas.face");
 var faceContext = faceCanvas.getContext("2d");
 
 var mug = new Image();
-mug.src = "./assets/grump.jpg";
+
+//set up the mug for the first time
+var mugCanvas = document.createElement("canvas");
+mugCanvas.width = mugCanvas.height = 400;
+var mugContext = mugCanvas.getContext("2d");
+mugContext.font = "bold 30px sans-serif";
+mugContext.textAlign = "center";
+mugContext.fillText("YOUR", mugCanvas.width / 2, 180);
+mugContext.fillText("FACE", mugCanvas.width / 2, 220);
+mugContext.fillText("HERE", mugCanvas.width / 2, 260);
+try {
+  mug.src = mugCanvas.toDataURL();
+} catch (err) { console.log(err) }
 
 // Rendering for the mug
 var pos = {
@@ -76,6 +88,13 @@ var drawFace = function() {
 }
 drawFace();
 
+
+mug.onload = function() {
+  pos.width = mugCanvas.width;
+  pos.height = mugCanvas.height;
+  drawFace();
+}
+
 //camera controls for customize/print
 var zooming = false;
 
@@ -110,16 +129,6 @@ var onClickMode = function() {
 };
 
 qsa(".workflow-controls .mode").forEach(el => el.addEventListener("click", onClickMode));
-
-mug.onload = function() {
-  var w = mug.naturalWidth || mug.height;
-  var h = mug.naturalHeight || mug.height;
-  pos.width = w;
-  pos.height = h;
-  pos.x = faceCanvas.width / 2;
-  pos.y = faceCanvas.height / 2;
-  drawFace();
-}
 
 //touch controls
 
@@ -215,7 +224,7 @@ var getEyedropper = function(callback) {
 }
 
 var setShade = function(shade) {
-  $("#face rect, #face path, #face polygon").style({
+  $("#face rect, #face path, #face polygon, .styled-35, .styled-26, .styled-41, .styled-48, .styled-24").style({
     fill: shade
   });
 }
