@@ -5,16 +5,16 @@
       "path": "logical-lineup"
     },
     "live": {
-      "bucket": "",
-      "path": ""
+      "bucket": "projects.seattletimes.com",
+      "path": "2015/custom-paper-hawk"
     }
   },
-  "title": "",
+  "title": "Build your own paper hawk",
   "description": "",
-  "url": "",
+  "url": "https://projects.seattletimes.com/2015/custom-paper-hawk/",
   "slug": "",
   "tags": [],
   "image": "assets/social.jpg",
   "production": false,
-  "embedded": true
+  "embedded": false
 }

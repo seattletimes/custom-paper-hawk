@@ -1,5 +1,5 @@
 require("./lib/social");
-// require("./lib/ads");
+require("./lib/ads");
 // var track = require("./lib/tracking");
 
 var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
@@ -119,7 +119,7 @@ var zoomToPrint = function(done) {
   });
 }
 
-zoomToFace();
+// zoomToFace();
 
 var onClickMode = function() {
   if (this.classList.contains("print")) {
@@ -211,6 +211,8 @@ document.querySelector(".take-selfie").addEventListener("click", function() {
 
 // UI for skin/hair tones
 
+var cancelEyedropper = function() {};
+
 var getEyedropper = function(callback) {
   var clickImage = function(e) {
     var bounds = faceCanvas.getBoundingClientRect();
@@ -218,21 +220,25 @@ var getEyedropper = function(callback) {
     var y = e.clientY - bounds.top;
     var pixels = faceContext.getImageData(x, y, 1, 1);
     var [r,g,b] = pixels.data;
-    document.body.classList.remove("eyedropper");
-    faceCanvas.removeEventListener("click", clickImage);
+    cancelEyedropper();
     callback(r, g, b);
   }
   document.body.classList.add("eyedropper");
   faceCanvas.addEventListener("click", clickImage);
-}
+  cancelEyedropper = function() {
+    document.body.classList.remove("eyedropper");
+    faceCanvas.removeEventListener("click", clickImage);
+  }
+};
 
 var setShade = function(shade) {
   $("#face rect, #face path, #face polygon, .styled-35, .styled-26, .styled-41, .styled-48, .styled-24").style({
     fill: shade
   });
-}
+};
 
 var useEmojiSkin = function() {
+  cancelEyedropper();
   var shade = this.getAttribute("data-shade");
   setShade(shade);
 };
@@ -248,6 +254,7 @@ var setHair = function(color) {
 };
 
 var usePresetHair = function() {
+  cancelEyedropper();
   var shade = this.getAttribute("data-shade");
   setHair(shade);
 };

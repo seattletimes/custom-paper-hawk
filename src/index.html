@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <%= t.include("partials/_head.html") %>
   </head>
-  <body>
+  <body class="printing">
     <script>
 /*immediately jump to HTTPS for GUM*/
 var l = window.location.toString();
@@ -19,11 +19,20 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
 
     <%= t.include("partials/_nav.html") %>
 
+    <%= t.include("partials/_ad.html", { type: "banner" }) %>
+
     <main class="paper-hawk">
       <h1>Build your own Paper Hawk</h1>
 
       <p>
-        It's your turn to join the team! Click the button below to begin customizing your own paper hawk, then print it out and assemble your very own Paper Hawk.
+        It's your turn to join the team! Use our web app to create your own Paper Hawk.
+
+      <ol class="instructions">
+        <li> Click the "customize" to begin.
+        <li> Upload a photo (or take a picture with your webcam in supported browsers).
+        <li> Drag the photo to position your face over the player's face.
+        <li> Click "Zoom out and print" to print your Paper Hawk for construction!
+      </ol>
 
       <div class="workflow-controls">
         <a class="customize mode">Customize your Paper Hawk</a>
@@ -35,16 +44,10 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
 
       <div class="canvas-container">
         <div class="image controls">
+
+          <div class="label">Face position</div>
           
           <div class="image-manipulation">
-            <a title="Zoom in" class="zoom in button">
-              <i class="fa fa-search-plus"></i>
-              <span class="text">Zoom in</span>
-            </a>
-            <a title="Zoom out" class="zoom out button">
-              <i class="fa fa-search-minus"></i>
-              <span class="text">Zoom out</span>
-            </a>
             <label title="Upload photo" class="file-upload button" for="upload-image">
               <i class="fa fa-photo"></i>
               <span class="text">Upload photo</span>
@@ -54,6 +57,14 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
             <a title="Photo from camera" class="take-selfie button">
               <i class="fa fa-camera"></i>
               <span class="text">Take photo</span>
+            </a>
+            <a title="Zoom in" class="zoom in button">
+              <i class="fa fa-search-plus"></i>
+              <span class="text">Zoom in</span>
+            </a>
+            <a title="Zoom out" class="zoom out button">
+              <i class="fa fa-search-minus"></i>
+              <span class="text">Zoom out</span>
             </a>
           </div>
 
@@ -89,7 +100,8 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
         </div>
       </div>
 
-      <img src="./assets/seattletimes.svg" class="print-logo page-break">
+      <br class="page-break">
+      <img src="./assets/seattletimes.svg" class="print-logo">
       <h2>Helmet/arms</h2>
 
       <div class="canvas-container">
