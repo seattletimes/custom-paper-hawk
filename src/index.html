@@ -34,11 +34,7 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
       <h2>Face and body</h2>
 
       <div class="canvas-container">
-        <div class="canvas-inner">
-          <%= t.include("assets/PaperDollFace.svg") %>
-          <canvas class="face" width=600 height=600></canvas>
-        </div>
-        <div class="controls">
+        <div class="image controls">
           
           <div class="image-manipulation">
             <a title="Zoom in" class="zoom in button">
@@ -60,6 +56,15 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
               Take photo
             </a>
           </div>
+
+        </div>
+        
+        <div class="canvas-inner">
+          <%= t.include("assets/PaperDollFace.svg") %>
+          <canvas class="face" width=600 height=600></canvas>
+        </div>
+
+        <div class="face controls">
           
           <div class="label">Skin tone</div>
           <div class="skin-tones">
@@ -84,7 +89,7 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
         </div>
       </div>
 
-      <img src="./assets/seattletimes.svg" class="print-logo">
+      <img src="./assets/seattletimes.svg" class="print-logo page-break">
       <h2>Helmet/arms</h2>
 
       <div class="canvas-container">
@@ -100,7 +105,10 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
         <video class="viewfinder"></video>
         <div class="reticule"></div>
       </div>
-      <button class="shutter">3... 2... 1...</button>
+      <button class="shutter">
+        <i class="fa fa-camera-retro"></i>
+        Say cheese!
+      </button>
     </div>
 
     <%= t.include("partials/_navBottom.html") %>

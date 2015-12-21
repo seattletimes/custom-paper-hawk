@@ -11,6 +11,7 @@
   .justify-content(center);
   .align-items(center);
   .flex-direction(column);
+  z-index: 99999;
 
   &.show {
     .display-flex();
@@ -24,6 +25,8 @@
     max-width: 100%;
     width: 600px;
     background: black;
+    -webkit-transform: scaleX(-1);
+    transform: scaleX(-1);
   }
 
   .close {
@@ -37,7 +40,12 @@
   }
 
   .shutter {
-    
+    border: 1px solid black;
+    background: white;
+    font-size: 20px;
+    font-family: @df-sans;
+    padding: 8px 16px;
+    border-radius: 8px;
   }
 
   .reticule {

@@ -37,11 +37,17 @@
 .controls {
   font-family: @df-sans;
   position: absolute;
+  z-index: 99;
   bottom: 0;
   width: 100%;
   background: rgba(255, 255, 255, .8);
   transition: opacity .2s linear;
-  box-shadow: 0 -8px 16px rgba(0, 0, 0, .2);
+  box-shadow: 0 0 16px rgba(0, 0, 0, .2);
+
+  &.image {
+    top: 0;
+    bottom: auto;
+  }
 
   .printing & {
     opacity: 0;
