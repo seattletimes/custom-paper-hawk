@@ -119,7 +119,7 @@ var zoomToPrint = function(done) {
     zooming = false;
     if (done) done();
   });
-}
+};
 
 var onClickMode = function() {
   var active = document.querySelector(".active.mode");
@@ -195,7 +195,13 @@ fileInput.addEventListener("change", function(e) {
   var reader = new FileReader();
   reader.addEventListener("load", function() {
     mug.src = reader.result;
-    mug.onload = drawFace;
+    mug.onload = function() {
+      var width = mug.naturalWidth || mug.width;
+      var height = mug.naturalHeight || mug.height;
+      pos.width = width > 600 ? 600 : width;
+      pos.height = pos.width / width * height;
+      drawFace();
+    };
   });
   reader.readAsDataURL(fileInput.files[0]);
 });
