@@ -23,6 +23,7 @@
 
   video {
     max-width: 100%;
+    max-height: 50vh;
     width: 600px;
     background: black;
     -webkit-transform: scaleX(-1);
@@ -63,5 +64,13 @@
     line-height: @size;
     text-align: center;
     font-size: @size;
+    font-family: @df-sans;
+
+    &.error {
+      width: auto;
+      font-size: 20px;
+      padding: 40px 20px;
+      line-height: 1;
+    }
   }
 }

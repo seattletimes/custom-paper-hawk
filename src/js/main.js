@@ -39,10 +39,12 @@ mugContext.textAlign = "center";
 var w = mugCanvas.width / 2;
 var h = mugCanvas.height / 2;
 // mugContext.fillRect(0, 0, mugCanvas.width, mugCanvas.height);
-mugContext.fillText("YOUR", w, h - 20);
-mugContext.fillText("FACE", w, h + 20);
-mugContext.fillText("HERE", w, h + 60);
+mugContext.fillText("your", w, h - 25);
+mugContext.fillText("face", w, h + 10);
+mugContext.fillText("here", w, h + 45);
 pos.width = pos.height = mugCanvas.width;
+pos.x = faceCanvas.offsetWidth / 2;
+pos.y = faceCanvas.offsetHeight / 2;
 mug.src = mugCanvas.toDataURL();
 
 var facePath = document.querySelector("#face path");

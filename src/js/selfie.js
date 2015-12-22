@@ -29,16 +29,25 @@ WebCam.prototype = {
   open: function(callback) {
     if (callback) this.onSnap = callback;
     var self = this;
+    var reticule = modal.querySelector(".reticule");
     var success = function(s) {
       self.stream = s;
       var url = URL.createObjectURL(s);
       viewfinder.src = url;
       viewfinder.play();
     };
+    var error = function(err) {
+      reticule.classList.add("error");
+      reticule.innerHTML = "Error: unable to open camera";
+      console.error(err);
+    };
     modal.classList.add("show");
-    modal.querySelector(".reticule").innerHTML = "";
+    reticule.innerHTML = "";
+    reticule.classList.remove("error");
     if (!self.stream) {
-      getUserMedia({ video: { facingMode: "user" } }, success, err => window.alert(err));
+      getUserMedia({ 
+        video: { optional: [{ facingMode: "user" }] } 
+      }, success, error);
     } else {
       success(self.stream);
     }
