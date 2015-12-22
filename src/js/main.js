@@ -122,7 +122,6 @@ var zoomToPrint = function(done) {
 }
 
 var onClickMode = function() {
-  if (this.classList.contains("null")) return; //skip the middle button
   var active = document.querySelector(".active.mode");
   if (active) active.classList.remove("active");
   this.classList.add("active");

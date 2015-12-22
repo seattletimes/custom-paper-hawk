@@ -29,12 +29,13 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
 
       <div class="workflow-controls">
         <a class="customize mode">1. Zoom in</a>
-        <a class="null mode">2. Customize</a>
+        <a class="customize null mode">2. Customize</a>
         <a class="print mode">3. Print</a>
       </div>
 
-      <img src="./assets/seattletimes.svg" class="print-logo">
-      <h2>Face and body</h2>
+      <div class="print-only">
+        <img src="./assets/seattletimes.svg" class="print-logo">
+      </div>
 
       <div class="canvas-container">
         <div class="image controls">
@@ -100,10 +101,9 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
     
     <div class="paper-hawk">
 
-      <h2>
+      <div class="print-only">
         <img src="./assets/seattletimes.svg" class="print-logo">
-        Helmet/arms
-      </h2>
+      </div>
 
       <div class="canvas-container">
         <div class="canvas-inner">

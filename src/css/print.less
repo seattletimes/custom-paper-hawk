@@ -11,6 +11,10 @@
   position: relative;
 }
 
+.print-only {
+  display: none;
+}
+
 @media print {
 
   nav.main-nav,
@@ -31,7 +35,9 @@
       display: block;
       max-width: 20%;
       max-height: 50px;
-      float: left;
+      position: absolute;
+      bottom: 0;
+      right: 0;
     }
 
     h2 {
@@ -49,6 +55,10 @@
       }
     }
 
+  }
+
+  .print-only {
+    display: block;
   }
 
 }
