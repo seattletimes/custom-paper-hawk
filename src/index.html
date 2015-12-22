@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
     <%= t.include("partials/_head.html") %>
   </head>
-  <body class="printing">
+  <body class="print-ready">
     <script>
 /*immediately jump to HTTPS for GUM*/
 var l = window.location.toString();
@@ -28,8 +28,8 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
         It's your turn to join the team! Use the buttons below to make your own customized Paper Hawk.
 
       <div class="workflow-controls">
-        <a class="customize mode">1. Zoom in</a>
-        <a class="customize null mode">2. Customize</a>
+        <a class="customize mode">1. Customize</a>
+        <a class="zoom-out mode">2. Check your work</a>
         <a class="print mode">3. Print</a>
       </div>
 
@@ -40,7 +40,7 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
       <div class="canvas-container">
         <div class="image controls">
 
-          <div class="label">Face position</div>
+          <div class="label">Face position - drag to adjust</div>
           
           <div class="image-manipulation">
             <label title="Upload photo" class="file-upload button" for="upload-image">

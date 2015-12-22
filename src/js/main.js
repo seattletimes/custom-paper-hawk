@@ -125,15 +125,14 @@ var onClickMode = function() {
   var active = document.querySelector(".active.mode");
   if (active) active.classList.remove("active");
   this.classList.add("active");
-  if (this.classList.contains("print")) {
-    document.body.classList.add("printing");
-    zoomToPrint(() => window.print());
-  } else {
-    document.body.classList.remove("printing");
-    zoomToFace(() => {
-      this.classList.remove("active");
-      document.querySelector(".null.mode").classList.add("active");
-    });
+  if (this.classList.contains("zoom-out")) {
+    document.body.classList.add("print-ready");
+    zoomToPrint();
+  } else if (this.classList.contains("print")) {
+    window.print()
+  } else if (this.classList.contains("customize")) {
+    document.body.classList.remove("print-ready");
+    zoomToFace();
   }
 };
 
