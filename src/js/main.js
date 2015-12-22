@@ -278,8 +278,8 @@ document.querySelector(".hair-tones .dropper").addEventListener("click", functio
 
 //detect printing
 window.onbeforeprint = function() {
-  if (document.body.classList.contains("printing")) return;
-  document.body.classList.add("printing");
+  if (document.body.classList.contains("print-ready")) return;
+  document.body.classList.add("print-ready");
   svg.setAttribute("viewBox", originalViewbox.join(" "));
   document.body.offsetWidth;
   drawFace();
