@@ -105,7 +105,6 @@ mug.onload = function() {
 var zooming = false;
 
 var zoomToFace = function(done) {
-  if (zooming) return;
   zooming = true;
   svgCam.zoomTo(facePath, 50, 1000, drawFace, function() {
     zooming = false;
@@ -114,7 +113,6 @@ var zoomToFace = function(done) {
 };
 
 var zoomToPrint = function(done) {
-  if (zooming) return;
   zooming = true;
   var view = { x: originalViewbox[0], y: originalViewbox[1], width: originalViewbox[2], height: originalViewbox[3] };
   svgCam.pan(view, 1000, drawFace, function() {
@@ -124,6 +122,7 @@ var zoomToPrint = function(done) {
 };
 
 var onClickMode = function() {
+  if (zooming) return;
   var active = document.querySelector(".active.mode");
   if (active) active.classList.remove("active");
   this.classList.add("active");
