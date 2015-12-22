@@ -8,7 +8,8 @@ var SVGCamera = require("./camera");
 var Hammer = require("hammerjs/hammer.min");
 var SelfieCamera = require("./selfie");
 
-var svgCam = new SVGCamera(document.querySelector("svg"));
+var svg = document.querySelector("svg");
+var svgCam = new SVGCamera(svg);
 var selfie = new SelfieCamera();
 
 var originalViewbox = document.querySelector("svg").getAttribute("viewBox").split(" ").map(Number);
@@ -101,11 +102,12 @@ mug.onload = function() {
 //camera controls for customize/print
 var zooming = false;
 
-var zoomToFace = function() {
+var zoomToFace = function(done) {
   if (zooming) return;
   zooming = true;
   svgCam.zoomTo(facePath, 50, 1000, drawFace, function() {
     zooming = false;
+    if (done) done();
   });
 };
 
@@ -119,15 +121,20 @@ var zoomToPrint = function(done) {
   });
 }
 
-// zoomToFace();
-
 var onClickMode = function() {
+  if (this.classList.contains("null")) return; //skip the middle button
+  var active = document.querySelector(".active.mode");
+  if (active) active.classList.remove("active");
+  this.classList.add("active");
   if (this.classList.contains("print")) {
     document.body.classList.add("printing");
     zoomToPrint(() => window.print());
   } else {
     document.body.classList.remove("printing");
-    zoomToFace();
+    zoomToFace(() => {
+      this.classList.remove("active");
+      document.querySelector(".null.mode").classList.add("active");
+    });
   }
 };
 
@@ -263,4 +270,19 @@ qsa(".hair-tones .hair").forEach(el => el.addEventListener("click", usePresetHai
 
 document.querySelector(".hair-tones .dropper").addEventListener("click", function() {
   getEyedropper((r, g, b) => setHair(`rgb(${r}, ${g}, ${b}`));
-})
+});
+
+//detect printing
+window.onbeforeprint = function() {
+  if (document.body.classList.contains("printing")) return;
+  document.body.classList.add("printing");
+  svg.setAttribute("viewBox", originalViewbox.join(" "));
+  document.body.offsetWidth;
+  drawFace();
+};
+if (window.matchMedia) {
+  var printQuery = window.matchMedia("print");
+  printQuery.addListener(function(e) {
+    if (printQuery.matches) window.onbeforeprint();
+  });
+}

@@ -23,7 +23,7 @@
 
   .mode {
     float: left;
-    width: 50%;
+    width: 33%;
     text-align: center;
     color: white;
     background: @df-dark-gray;
@@ -32,19 +32,24 @@
     border: 2px solid white;
     cursor: pointer;
     transition: background .2s linear;
+    
+    &.null {
+      background: @df-dark-gray;
+    }
 
     @media @mobile {
       display: block;
       float: none;
       width: 100%;
+      padding: 8px 0;
     }
 
     &.active {
-      background: @df-blue;
+      background: darken(@df-blue, 20%);
     }
 
     &:hover {
-      background: darken(@df-blue, 20%);
+      background: @df-blue;
     }
   }
 }
