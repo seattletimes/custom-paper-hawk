@@ -38,7 +38,7 @@ WebCam.prototype = {
     modal.classList.add("show");
     modal.querySelector(".reticule").innerHTML = "";
     if (!self.stream) {
-      getUserMedia({ video: true }, success, err => window.alert(err));
+      getUserMedia({ video: { facingMode: "user" } }, success, err => window.alert(err));
     } else {
       success(self.stream);
     }
