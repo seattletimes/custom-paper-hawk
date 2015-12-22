@@ -44,7 +44,7 @@ mugContext.fillText("HERE", w, h + 60);
 pos.width = pos.height = mugCanvas.width;
 mug.src = mugCanvas.toDataURL();
 
-var facePath = document.querySelector("#face .front");
+var facePath = document.querySelector("#face path");
 var svgContainer = document.querySelector(".canvas-inner");
 
 var positionFaceCanvas = function() {
@@ -232,7 +232,7 @@ var getEyedropper = function(callback) {
 };
 
 var setShade = function(shade) {
-  $("#face rect, #face path, #face polygon, .styled-35, .styled-26, .styled-41, .styled-48, .styled-24").style({
+  $("#face path, .st8, .st19, .st14, .st49, .styled-35, .styled-26, .styled-41, .styled-48, .styled-24").style({
     fill: shade
   });
 };
@@ -250,7 +250,7 @@ document.querySelector(".skin-tones .dropper").addEventListener("click", functio
 });
 
 var setHair = function(color) {
-  $(".st8").style({ fill: color });
+  $(".st10").style({ fill: color });
 };
 
 var usePresetHair = function() {
