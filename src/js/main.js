@@ -3,6 +3,8 @@ require("./lib/ads");
 // var track = require("./lib/tracking");
 
 var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
+var noop = function() {};
+
 var $ = require("./savage");
 var SVGCamera = require("./camera");
 var Hammer = require("hammerjs/hammer.min");
@@ -11,6 +13,7 @@ var SelfieCamera = require("./selfie");
 var svg = document.querySelector("svg");
 var svgCam = new SVGCamera(svg);
 var selfie = new SelfieCamera();
+
 
 var originalViewbox = document.querySelector("svg").getAttribute("viewBox").split(" ").map(Number);
 
@@ -103,21 +106,24 @@ mug.onload = function() {
 
 //camera controls for customize/print
 var zooming = false;
+var mode = "print";
 
-var zoomToFace = function(done) {
+var zoomToFace = function(done = noop) {
   zooming = true;
+  mode = "customize";
   svgCam.zoomTo(facePath, 50, 1000, drawFace, function() {
     zooming = false;
-    if (done) done();
+    done();
   });
 };
 
-var zoomToPrint = function(done) {
+var zoomToPrint = function(done = noop) {
   zooming = true;
+  mode = "print";
   var view = { x: originalViewbox[0], y: originalViewbox[1], width: originalViewbox[2], height: originalViewbox[3] };
   svgCam.pan(view, 1000, drawFace, function() {
     zooming = false;
-    if (done) done();
+    done();
   });
 };
 
@@ -126,12 +132,13 @@ var onClickMode = function() {
   var active = document.querySelector(".active.mode");
   if (active) active.classList.remove("active");
   this.classList.add("active");
-  if (this.classList.contains("zoom-out")) {
+  if (this.classList.contains("zoom-out") && mode == "customize") {
     document.body.classList.add("print-ready");
     zoomToPrint();
   } else if (this.classList.contains("print")) {
+    mode = "print";
     window.print()
-  } else if (this.classList.contains("customize")) {
+  } else if (this.classList.contains("customize") && mode == "print") {
     document.body.classList.remove("print-ready");
     zoomToFace();
   }
