@@ -18,8 +18,19 @@
   font-size: 16px;
 }
 
+.links {
+  font-family: @df-serif;
+  font-size: 14px;
+  text-align: center;
+
+  @media @mobile {
+    display: none;
+  }
+}
+
 .workflow-controls {
   overflow: hidden;
+  padding-top: 10px;
 
   .mode {
     float: left;
@@ -32,7 +43,7 @@
     border: 2px solid white;
     cursor: pointer;
     transition: background .2s linear;
-    
+
     &.null {
       background: @df-dark-gray;
     }

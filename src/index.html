@@ -22,11 +22,12 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
     <%= t.include("partials/_ad.html", { type: "banner" }) %>
 
     <div class="paper-hawk">
-      <h1>Build your own Paper Hawk</h1>
+      <h1>Make your own Paper Hawk</h1>
 
-      <p>
-        It's your turn to join the team! Use the buttons below to make your own customized Paper Hawk.
-
+      <p>It's your turn to join the team! Use the buttons below to make your own customized Paper Hawk.</p>
+      <p>Once you've printed and built your doll, you can <a href="http://www.seattletimes.com/sports/seahawks/join-the-seahawks-yourself-make-your-own-customizable-12th-man-paper-hawks-doll/#upload">upload your photos</a> to show off your handiwork! You can find all our previous Paper Hawks <a href="http://www.seattletimes.com/category/paperhawks/">here</a>, including the seven players featured this year.</p>
+      <p class="links"><a href="http://www.seattletimes.com/sports/seahawks/paper-hawks-are-back-which-seahawks-player-will-it-be/">TE Jimmy Graham</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.seattletimes.com/sports/seahawks/paper-hawks-who-is-the-next-seattle-seahawks-paper-doll/">WR Tyler Lockett</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.seattletimes.com/sports/seahawks/paper-hawks-who-will-be-the-next-seattle-seahawks-paper-doll/">CB Richard Sherman</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.seattletimes.com/sports/seahawks/paper-hawks-who-will-be-the-next-seattle-seahawks-paper-doll-2/">K Steven Hauschka</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.seattletimes.com/sports/seahawks/paper-hawks-a-new-seattle-seahawks-paper-doll-is-coming-friday/">LB Bobby Wagner</a>&nbsp;&nbsp;|&nbsp;&nbsp;<a href="http://www.seattletimes.com/sports/seahawks/seahawks-punter-jon-ryan-is-this-weeks-paper-hawks-doll/">P Jon Ryan</a></p>
+      <p><hr/></p>
       <div class="workflow-controls">
         <a class="customize mode">1. Customize</a>
         <a class="zoom-out mode">2. Check your work</a>
@@ -41,7 +42,7 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
         <div class="image controls">
 
           <div class="label">Face position - drag to adjust</div>
-          
+
           <div class="image-manipulation">
             <label title="Upload photo" class="file-upload button" for="upload-image">
               <i class="fa fa-photo"></i>
@@ -64,14 +65,14 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
           </div>
 
         </div>
-        
+
         <div class="canvas-inner">
           <%= t.include("assets/PaperDollFace.svg") %>
           <canvas class="face" width=600 height=600></canvas>
         </div>
 
         <div class="face controls">
-          
+
           <div class="label">Skin tone</div>
           <div class="skin-tones">
             <% ["#F7DECE", "#F3D2A2", "#D5AB88", "#AF7E57", "#7C533E"].forEach(function(shade) { %>
@@ -98,7 +99,7 @@ if (!l.match(/localhost/) && !l.match(/https:/i)) {
     </div>
 
     <div class="page-break"></div>
-    
+
     <div class="paper-hawk">
 
       <div class="print-only">

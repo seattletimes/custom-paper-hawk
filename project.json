@@ -9,12 +9,12 @@
       "path": "2015/custom-paper-hawk"
     }
   },
-  "title": "Build your own Paper Hawk",
-  "description": "It's your chance to join the team! Create, print, and assemble your own customized Paper Hawk.",
+  "title": "Make your own Paper Hawk",
+  "description": "It's your chance to join the team! Create, print and assemble your own customized Paper Hawk.",
   "url": "https://projects.seattletimes.com/2015/custom-paper-hawk/",
-  "slug": "",
+  "slug": "custom-paper-hawk",
   "tags": [],
-  "image": "assets/blank.jpg",
+  "image": "assets/social.jpg",
   "production": true,
   "embedded": false
 }
