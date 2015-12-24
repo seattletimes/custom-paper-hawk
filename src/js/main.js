@@ -5,8 +5,8 @@ require("./lib/ads");
 var qsa = s => Array.prototype.slice.call(document.querySelectorAll(s));
 var noop = function() {};
 
-var $ = require("./savage");
-var SVGCamera = require("./camera");
+var $ = require("savage-query");
+var SVGCamera = require("savage-camera");
 var Hammer = require("hammerjs/hammer.min");
 var SelfieCamera = require("./selfie");
 

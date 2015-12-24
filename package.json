@@ -24,6 +24,8 @@
     "hammerjs": "^2.0.4",
     "less": "^2.0.0",
     "mime": "^1.2.11",
+    "savage-camera": "0.0.1",
+    "savage-query": "0.0.1",
     "shelljs": "^0.5.1",
     "through2": "^2.0.0",
     "typogr": "^0.6.4"
